@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/features/get_weather/presentation/view/weather_body_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -47,7 +48,11 @@ class _SearchPageState extends State<SearchPage> {
               onFieldSubmitted: (value) {
                 cityName = value;
                 if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
+                    formKey.currentState!.save();
+
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const WeatherBodyPage()));
+
               } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});
