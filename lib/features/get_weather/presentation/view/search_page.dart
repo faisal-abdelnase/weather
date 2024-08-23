@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather/features/get_weather/presentation/view/weather_body_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/features/get_weather/presentation/view/manager/cubit/weather_cubit.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -50,8 +51,11 @@ class _SearchPageState extends State<SearchPage> {
                 if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
 
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const WeatherBodyPage()));
+                    BlocProvider.of<WeatherCubit>(context).getWeather(cityName: cityName!);
+                    BlocProvider.of<WeatherCubit>(context).cityName = cityName;
+
+                    Navigator.pop(context);
+
 
               } else {
                   autovalidateMode = AutovalidateMode.always;
@@ -74,6 +78,12 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+
+                    BlocProvider.of<WeatherCubit>(context).getWeather(cityName: cityName!);
+                    BlocProvider.of<WeatherCubit>(context).cityName = cityName;
+
+                    Navigator.pop(context);
+
                   } else {
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});

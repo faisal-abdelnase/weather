@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:weather/features/get_weather/presentation/view/search_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/features/get_weather/presentation/data/model/weather_model.dart';
+import 'package:weather/features/get_weather/presentation/view/manager/cubit/weather_cubit.dart';
 
 class WeatherBodyPage extends StatelessWidget {
-  const WeatherBodyPage({super.key});
+  const WeatherBodyPage({super.key, required this.weatherModel});
+
+  final WeatherModel? weatherModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      // appBar: AppBar(
       
-        backgroundColor: Colors.orange,
-        title: const Text("My Weather", 
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),),
-        actions: [
-          IconButton(
-            onPressed: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const SearchPage()));
-            },
-            icon: const Icon(
-              Icons.search,
-              size: 32,
-              ),
-              ),
-        ],
-        ),
+      //   backgroundColor: Colors.orange,
+      //   title: const Text("My Weather", 
+      //   style: TextStyle(
+      //     fontWeight: FontWeight.bold,
+      //   ),),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: (){
+      //         Navigator.of(context).push(
+      //           MaterialPageRoute(builder: (context) => const SearchPage()));
+      //       },
+      //       icon: const Icon(
+      //         Icons.search,
+      //         size: 32,
+      //         ),
+      //         ),
+      //   ],
+      //   ),
 
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.orange,
-                Colors.orange[100]!,
+                weatherModel!.getColor(),
+                weatherModel!.getColor()[100]!,
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter
@@ -43,15 +47,15 @@ class WeatherBodyPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Cairo", 
-                style: TextStyle(
+                Text(BlocProvider.of<WeatherCubit>(context).cityName!, 
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 32,
                 ),
                 ),
           
-                const Text("updated at 0 : 52", 
-                style: TextStyle(
+                Text("updated at ${weatherModel!.date.hour.toString()} : ${weatherModel!.date.minute.toString()}", 
+                style: const TextStyle(
                   fontSize: 20,
                 ),
                 ),
@@ -62,18 +66,18 @@ class WeatherBodyPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Image.asset("asset/images/clear.png"),
-                    const Text("31",
-                    style: TextStyle(
+                    Image.asset(weatherModel!.getImage()),
+                    Text("${weatherModel!.temp.toInt()}",
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                     ),
           
-                    const Column(
+                    Column(
                       children: [
-                        Text("maxTemp : 38"),
-                        Text("minTemp : 27"),
+                        Text("maxTemp : ${weatherModel!.maxTemp.toInt()}"),
+                        Text("minTemp : ${weatherModel!.minTemp.toInt()}"),
                       ],
                     ),
                   ],
@@ -83,8 +87,8 @@ class WeatherBodyPage extends StatelessWidget {
                   height: 64,
                 ),
           
-                const Text("Sunny", 
-                style: TextStyle(
+                Text(weatherModel!.weahterStateName, 
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold
                 ),)
