@@ -55,8 +55,6 @@ class _SearchPageState extends State<SearchPage> {
                     BlocProvider.of<WeatherCubit>(context).cityName = cityName;
 
                     Navigator.pop(context);
-
-
               } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});

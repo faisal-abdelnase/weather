@@ -11,26 +11,6 @@ class WeatherBodyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      
-      //   backgroundColor: Colors.orange,
-      //   title: const Text("My Weather", 
-      //   style: TextStyle(
-      //     fontWeight: FontWeight.bold,
-      //   ),),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: (){
-      //         Navigator.of(context).push(
-      //           MaterialPageRoute(builder: (context) => const SearchPage()));
-      //       },
-      //       icon: const Icon(
-      //         Icons.search,
-      //         size: 32,
-      //         ),
-      //         ),
-      //   ],
-      //   ),
 
         body: Container(
           decoration: BoxDecoration(

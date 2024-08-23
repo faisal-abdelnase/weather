@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
         title: const Text("My Weather", 
         style: TextStyle(
           color: Colors.white,
@@ -39,7 +38,7 @@ class HomePage extends StatelessWidget {
                 child: CircularProgressIndicator());
             }
 
-            else if( state is WeatherFailure){
+            else if(state is WeatherFailure){
               return const Center(
                 child: Text("Something went plasy try again"));
             }
